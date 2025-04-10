@@ -52,3 +52,36 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Visual Studio specific folders
+.vs/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Backup files
+*.bak
+*.swp
+
+# Recycle Bin used for Visual Studio extensions
+*.ide
+
+# Visual Studio Code specific
+.vscode/
+
+# Auto-generated files
+Generated_Code/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# dotenv environment files
+.env
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
