@@ -1,0 +1,125 @@
+﻿@model ETicaretData.ViewModels.ShippingDetails
+
+@{
+    ViewData["Title"] = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>Checkout</h2>
+            <p class="lead">Please fill in your order details below.</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                @await Component.InvokeAsync("CartSummary")
+                <form class="card p-2" method="post" asp-action="ApplyPromoCode">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code" name="promoCode">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </form>
+                @if (TempData["PromoCodeMessage"] != null)
+                {
+                    <div class="alert alert-info mt-2">
+                        @TempData["PromoCodeMessage"]
+                    </div>
+                }
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Billing address</h4>
+                @using (Html.BeginForm())
+                {
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="username" class="form-label">Username</label>
+                            @if (User.Identity.Name != null)
+                            {
+                                <input type="text" class="form-control" id="username" value="@User.Identity.Name" asp-for="UserName" readonly>
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="username" placeholder="Username" asp-for="UserName">
+                            }
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="email" class="form-label">Email</label>
+                            @if (User.Identity.Name != null)
+                            {
+                                <input type="email" class="form-control" id="email" value="@Model.Email" asp-for="Email" readonly>
+                            }
+                            else
+                            {
+                                <input type="email" class="form-control" id="email" placeholder="you@example.com" asp-for="Email">
+                            }
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="addressTitle" class="form-label">Address Title</label>
+                            @if (User.Identity.Name != null)
+                            {
+                                @Html.DropDownListFor(model => model.AddressTitle, ViewBag.AddressList as List<SelectListItem>, new { @class = "form-control", id = "addressDropdown" })
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="addressTitle" placeholder="Address Title" asp-for="AddressTitle">
+                            }
+                            <span asp-validation-for="AddressTitle" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control", id = "addressInput", placeholder = "1234 Main St" })
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="city" class="form-label">City</label>
+                            @Html.TextBoxFor(x => x.City, new { @class = "form-control", id = "cityInput", placeholder = "City" })
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+                }
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    @if (User.Identity.Name != null)
+    {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var addressData = {
+                    "@Html.Raw(ViewBag.AddressTitle1)": { address: "@Html.Raw(ViewBag.Address1)", city: "@Html.Raw(ViewBag.City1)" },
+                    "@Html.Raw(ViewBag.AddressTitle2)": { address: "@Html.Raw(ViewBag.Address2)", city: "@Html.Raw(ViewBag.City2)" }
+                };
+
+                $("#addressDropdown").change(function () {
+                    var selectedValue = $(this).val();
+                    if (addressData[selectedValue]) {
+                        $("#addressInput").val(addressData[selectedValue].address);
+                        $("#cityInput").val(addressData[selectedValue].city);
+                    } else {
+                        $("#addressInput").val('');
+                        $("#cityInput").val('');
+                    }
+                });
+            });
+        </script>
+    }
+}

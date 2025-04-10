@@ -1,0 +1,94 @@
+﻿@model ETicaretData.Identity.AppUser
+
+@{
+	ViewData["Title"] = "Edit";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="min-vh-100 bg-light">
+	<div class="container py-5">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+				<div class="card" style="border-radius: 15px;">
+					<div class="card-body p-5">
+						<h2 class="text-uppercase text-center mb-5">Edit Profile</h2>
+
+						<form asp-action="Edit">
+							<div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+							<div class="form-outline mb-4">
+								<label asp-for="Name" class="form-label"></label>
+								<input asp-for="Name" class="form-control" />
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="Surname" class="form-label"></label>
+								<input asp-for="Surname" class="form-control" />
+								<span asp-validation-for="Surname" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="UserName" class="form-label"></label>
+								<input asp-for="UserName" class="form-control" />
+								<span asp-validation-for="UserName" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="Email" class="form-label"></label>
+								<input asp-for="Email" class="form-control" />
+								<span asp-validation-for="Email" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="PhoneNumber" class="form-label"></label>
+								<input asp-for="PhoneNumber" class="form-control" />
+								<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="AddressTitle1" class="form-label"></label>
+								<input asp-for="AddressTitle1" class="form-control" />
+								<span asp-validation-for="AddressTitle1" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="Address1" class="form-label"></label>
+								<input asp-for="Address1" class="form-control" />
+								<span asp-validation-for="Address1" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="City1" class="form-label"></label>
+								<input asp-for="City1" class="form-control" />
+								<span asp-validation-for="City1" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="AddressTitle2" class="form-label"></label>
+								<input asp-for="AddressTitle2" class="form-control" />
+								<span asp-validation-for="AddressTitle2" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="Address2" class="form-label"></label>
+								<input asp-for="Address2" class="form-control" />
+								<span asp-validation-for="Address2" class="text-danger"></span>
+							</div>
+							<div class="form-outline mb-4">
+								<label asp-for="City2" class="form-label"></label>
+								<input asp-for="City2" class="form-control" />
+								<span asp-validation-for="City2" class="text-danger"></span>
+							</div>
+							<div class="d-flex justify-content-center">
+								<input type="submit" value="Edit" class="btn btn-info" />
+							</div>
+						</form>
+						<div class="d-flex justify-content-center mt-4">
+							<a class="btn btn-primary" asp-action="Profile" asp-route-userName="@Model.UserName">Back to Profile</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.min-vh-100 {
+		min-height: 100vh;
+	}
+</style>
+
+

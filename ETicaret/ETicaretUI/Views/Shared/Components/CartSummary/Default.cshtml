@@ -1,0 +1,36 @@
+﻿@model List<ETicaretData.ViewModels.CartItem>
+
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Your cart</span>
+    <span class="badge bg-primary rounded-pill">@Model.Count</span>
+</h4>
+<ul class="list-group mb-3">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+                <h6 class="my-0">@item.Product.Name</h6>
+                <small class="text-muted">Quantity: @item.Quantity</small>
+            </div>
+            <span class="text-muted">@((item.Product.Price * item.Quantity).ToString("c"))</span>
+        </li>
+    }
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total</span>
+        <strong>@ViewBag.Total.ToString("c")</strong>
+    </li>
+    @if (ViewBag.Discount > 0)
+    {
+        <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>ExampleCode</small>
+            </div>
+            <span class="text-success">-@ViewBag.Discount.ToString("c")</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Total after discount</span>
+            <strong>@ViewBag.DiscountedTotal.ToString("c")</strong>
+        </li>
+    }
+</ul>

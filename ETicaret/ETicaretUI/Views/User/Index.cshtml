@@ -1,0 +1,56 @@
+﻿@using ETicaretData.ViewModels
+@model IEnumerable<UserRoleViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Users</h1>
+<hr />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Username</td>
+                <td>
+                    @if (item.Roles.Any())
+                    {
+                        <div>
+                            @foreach (var role in item.Roles)
+                            {
+                                var roleClass = role switch
+                                {
+                                    "Admin" => "bg-danger",
+                                    "Personnel" => "bg-warning",
+                                    _ => "bg-primary"
+                                };
+                                <span class="badge @roleClass">@role</span>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Role</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-info" asp-action="RoleAssign" asp-route-id="@item.Id">Role Assignment</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+

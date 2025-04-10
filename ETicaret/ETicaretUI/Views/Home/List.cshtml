@@ -1,0 +1,63 @@
+﻿@using ETicaretData.ViewModels
+@model ListViewModel
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("_GetCategoryList", Model.Categories)
+        </div>
+        <div class="col-md-9">
+            <form method="get" asp-action="List" class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <select name="sortOrder" class="form-select" onchange="this.form.submit()">
+                            @switch (ViewBag.sortOrder)
+                            {
+                                case "mostSellers":
+                                    <option value="mostSellers" selected>Most Sellers</option>
+                                    <option value="priceAsc">Price: Low to High</option>
+                                    <option value="priceDesc">Price: High to Low</option>
+                                    break;
+                                case "priceAsc":
+                                    <option value="mostSellers">Most Sellers</option>
+                                    <option value="priceAsc" selected>Price: Low to High</option>
+                                    <option value="priceDesc">Price: High to Low</option>
+                                    break;
+                                case "priceDesc":
+                                    <option value="mostSellers">Most Sellers</option>
+                                    <option value="priceAsc">Price: Low to High</option>
+                                    <option value="priceDesc" selected>Price: High to Low</option>
+                                    break;
+                                default:
+                                    <option value="" selected>Sort by</option>
+                                    <option value="mostSellers">Most Sellers</option>
+                                    <option value="priceAsc">Price: Low to High</option>
+                                    <option value="priceDesc">Price: High to Low</option>
+                                    break;
+                            }
+                        </select>
+                    </div>
+                </div>
+            </form>
+            @if (Model.Products.Count == 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i> Bu kategoride bir ürün bulunamadı.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert">
+                    <i class="fa-solid fa-circle-exclamation"></i> <strong>@Model.Products.Count</strong> adet ürün bulundu.
+                </div>
+            }
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @Html.Partial("_ProductList", Model.Products)
+            </div>
+        </div>
+    </div>
+</div>

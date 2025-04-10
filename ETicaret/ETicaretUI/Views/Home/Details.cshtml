@@ -1,0 +1,61 @@
+﻿@model ETicaretData.Entities.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card w-75">
+                <img src="@Model.Image" class="card-img-top img-fluid rounded-3" alt="@Model.Name">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4">@Model.Name</h1>
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-primary me-2">Stock: @Model.Stock</span>
+                <span class="badge bg-secondary">#@Model.Id</span>
+            </div>
+            <p class="lead">@Model.Description</p>
+            <div class="d-flex align-items-center mb-3">
+                <div class="text-warning me-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <span class="badge bg-success"><a href="#" class="text-white text-decoration-none">60 reviews</a></span>
+            </div>
+            <div class="mb-3">
+                <span class="badge bg-danger bg-gradient fs-4 fw-bold">@Model.Price.ToString("c")</span>
+            </div>
+            <a asp-action="Buy" asp-controller="Cart" asp-route-id="@Model.Id" class="btn btn-success btn-lg">
+                <i class="fa-solid fa-cart-plus"></i> Add To Cart
+            </a>
+        </div>
+    </div>
+    <ul class="nav nav-tabs my-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc-tab-pane" type="button" role="tab" aria-controls="desc-tab-pane" aria-selected="true">Description</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment-tab-pane" type="button" role="tab" aria-controls="payment-tab-pane" aria-selected="false">Payment Methods</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" type="button" role="tab" aria-controls="review-tab-pane" aria-selected="false">Reviews</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="desc-tab-pane" role="tabpanel" aria-labelledby="desc-tab" tabindex="0">@Model.Description</div>
+        <div class="tab-pane fade" id="payment-tab-pane" role="tabpanel" aria-labelledby="payment-tab" tabindex="0">
+            <p>.</p>
+        </div>
+        <div class="tab-pane fade" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="0">
+            <p>.</p>
+        </div>
+    </div>
+</div>
+

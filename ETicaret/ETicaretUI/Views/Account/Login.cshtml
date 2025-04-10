@@ -1,0 +1,60 @@
+﻿@using ETicaretData.ViewModels
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="form-signin w-100 m-auto">
+    <form method="post">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+
+        <div class="form-floating mb-3">
+            @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+            @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
+        </div>
+        <div class="form-floating mb-3">
+            @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+            @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        </div>
+        <div class="checkbox mb-3">
+            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+</main>
+
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+    }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        .form-signin input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+</style>

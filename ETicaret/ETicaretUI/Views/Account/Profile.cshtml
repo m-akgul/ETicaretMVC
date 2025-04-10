@@ -1,0 +1,74 @@
+﻿@model ETicaretData.Identity.AppUser
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="min-vh-100 bg-light">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <h2 class="text-uppercase text-center mb-5">Profile</h2>
+
+                        <div class="mb-4">
+                            <h4 class="text-center">@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h4>
+                        </div>
+                        <hr />
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.UserName)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.PhoneNumber)
+                            </dd>
+                            @if (Model.Address1 != null)
+                            {
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Address1)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.AddressTitle1) | @Html.DisplayFor(model => model.Address1) - @Html.DisplayFor(model => model.City1)
+                                </dd>
+                            }
+                            @if (Model.Address2 != null)
+                            {
+                                <dt class="col-sm-4">
+                                    @Html.DisplayNameFor(model => model.Address2)
+                                </dt>
+                                <dd class="col-sm-8">
+                                    @Html.DisplayFor(model => model.AddressTitle2) | @Html.DisplayFor(model => model.Address2) - @Html.DisplayFor(model => model.City2)
+                                </dd>
+                            }
+                        </dl>
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-warning me-2" asp-action="Edit" asp-route-userName="@Model.UserName">Edit Profile</a>
+                            <a class="btn btn-info me-2" asp-action="MyOrders" asp-controller="Order" asp-route-userName="@Model.UserName">My Orders</a>
+                            <a class="btn btn-primary" asp-action="List" asp-controller="Home">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .min-vh-100 {
+        min-height: 100vh;
+    }
+</style>

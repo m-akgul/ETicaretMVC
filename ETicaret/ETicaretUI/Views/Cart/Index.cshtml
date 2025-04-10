@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ETicaretData.ViewModels.CartItem>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sepet</h1>
+<hr />
+@if (TempData["UrunYok"] != null)
+{
+	<script>
+		window.onload = function() {
+			alert("@Html.Raw(TempData["UrunYok"])");
+		};
+	</script>
+}
+
+@if (Model == null)
+{
+	<div class="alert alert-danger" role="alert">
+		Sepetiniz Boş
+	</div>
+}
+else
+{
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Product Name</th>
+				<th>Product Price</th>
+				<th>Quantity</th>
+				<th>Total </th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Product.Name</td>
+					<td>@item.Product.Price.ToString("c")</td>
+					<td>
+						@if (item.Quantity == 1)
+						{
+							<a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.Product.Id">
+								<i class="fa fa-trash"></i>
+							</a>
+						}
+						else
+						{
+							<a class="btn btn-secondary" asp-action="DecreaseQuantity" asp-route-id="@item.Product.Id">-</a>
+						}
+						@item.Quantity
+						<a class="btn btn-secondary" asp-action="IncreaseQuantity" asp-route-id="@item.Product.Id">+</a>
+					</td>
+					<td>@((item.Product.Price * item.Quantity).ToString("c"))</td>
+					<td>
+						<a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.Product.Id">Sil</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">Toplam</td>
+				<td>@ViewBag.Total</td>
+			</tr>
+		</tfoot>
+	</table>
+}
+<div>
+	<a asp-action="List" asp-controller="Home" class="float-start btn btn-info">Alışverişe devam et</a>
+	<a asp-action="CheckOut" asp-controller="Cart" class="float-end btn btn-success">Alışverişi Tamamla</a>
+</div>
