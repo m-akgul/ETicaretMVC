@@ -45,8 +45,8 @@ Ensure the following tools are installed:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/e-ticaret.git
-   cd e-ticaret
+   git clone https://github.com/m-akgul/ETicaretMVC.git
+   cd ETicaretMVC
    ```
 
 2. **Open Solution:**
@@ -54,9 +54,9 @@ Ensure the following tools are installed:
    - Right-click `ETicaretUI` → Set as Startup Project.
 
 3. **Configure Database:**
-   - In `ETicaretData/ETicaretDataContextContext.cs`, update the `UseSqlServer` method with your own server name:
+   - In `ETicaretData/Context/ETicaretContext.cs`, update the `UseSqlServer` method with your own server name:
      ```csharp
-     options.UseSqlServer("Server=YOUR_SERVER_NAME;Database=ETicaretDB;Trusted_Connection=True;");
+     options.UseSqlServer("Server=YOUR_SERVER_NAME;Database=ETicaret;Trusted_Connection=True;");
      ```
 
 4. **Restore NuGet Packages:**
@@ -99,8 +99,6 @@ Ensure the following tools are installed:
 ---
 
 ## 🖼️ Screenshots
-
-> You can add screenshots in the `images/` folder and reference them below.
 
 ### Home Page
 ![Home Page](images/home-page.png)
