@@ -101,16 +101,19 @@ Ensure the following tools are installed:
 ## 🖼️ Screenshots
 
 ### Home Page
-![Home Page](images/home-page.png)
-
-### Product Listing
-![Product Listing](images/product-listing.png)
-
-### Shopping Cart
-![Shopping Cart](images/shopping-cart.png)
+![Home Page](images/Home.png)
 
 ### Admin Panel
-![Admin Panel](images/admin-panel.png)
+![Admin Panel](images/Admin.png)
+
+### Profile Page
+![Profile Page](images/Profile.png)
+
+### Shopping Cart
+![Shopping Cart](images/Cart.png)
+
+### Checkout Page
+![Checkout Page](images/Checkout.png)
 
 ---
 
